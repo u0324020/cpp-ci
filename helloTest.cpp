@@ -44,11 +44,11 @@ int main()
   runner.run(controller);
 
   // this is to output results in compiler format
-  CPPUNIT_NS::CompilerOutputter mycompileroutputter(&result, std::cerr);
-  mycompileroutputter.write ();
+  CPPUNIT_NS::CompilerOutputter compileroutputter(&result, std::cerr);
+  compileroutputter.write ();
 
   // this is to output XML for github actions publish test results
-  std::ofstream xmlFileOut("cppTestResult.xml");
+  std::ofstream xmlFileOut("cppTestResult1.xml");
   CppUnit::XmlOutputter xmlOut(&result, xmlFileOut);
   xmlOut.write();
 
