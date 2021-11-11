@@ -1,10 +1,13 @@
 #include <iostream>
 #include <cppunit/TestRunner.h>
 #include <cppunit/TestResult.h>
+#include <cppunit/XmlOutputter.h>
+#include <cppunit/CompilerOutputter.h>
 #include <cppunit/TestResultCollector.h>
 #include <cppunit/extensions/HelperMacros.h>
 #include <cppunit/BriefTestProgressListener.h>
 #include <cppunit/extensions/TestFactoryRegistry.h>
+
 
 class Test : public CPPUNIT_NS::TestCase
 {
@@ -39,6 +42,15 @@ int main()
   CPPUNIT_NS::TestRunner runner;
   runner.addTest(CPPUNIT_NS::TestFactoryRegistry::getRegistry().makeTest());
   runner.run(controller);
+
+  // this is to output results in compiler format
+  CPPUNIT_NS::CompilerOutputter mycompileroutputter(&result, std::cerr);
+  mycompileroutputter.write ();
+
+  // this is to output XML for github actions publish test results
+  std::ofstream xmlFileOut("cppTestResult.xml");
+  CppUnit::XmlOutputter xmlOut(&result, xmlFileOut);
+  xmlOut.write();
 
   return result.wasSuccessful() ? 0 : 1;
 }

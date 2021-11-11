@@ -7,5 +7,4 @@ test:
 	./helloTest
 
 clean:
-	$(RM) hello helloTest
-	
+	$(RM) hello helloTest cppTestResult.xml
