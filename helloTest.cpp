@@ -48,8 +48,9 @@ int main()
   compileroutputter.write ();
 
   // this is to output XML for github actions publish test results
-  std::ofstream xmlFileOut("cppTestResult1.xml");
-  CppUnit::XmlOutputter xmlOut(&result, xmlFileOut);
+  std::ofstream xmlFileOut("cppTestResult.xml");
+  CppUnit::XmlOutputter xmlOut(&result, xmlFileOut, "UTF-8");
+  // CppUnit::XmlOutputter xmlOut(&result, xmlFileOut, encoding="ISO-8859-1");
   xmlOut.write();
 
   return result.wasSuccessful() ? 0 : 1;
